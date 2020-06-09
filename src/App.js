@@ -1,26 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Flashcard from "./Flashcard"
+import FlashcardForm from "./FlashcardForm"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {
+      flashcards: [
+        {id: 1, word: "Black Bear", description: "Ursus Americanus"},
+        {id: 2, word: "Grizzly Bear", description: "Ursus Arctos Horribilis"},
+        {id: 3, word: "Polar Bear", description: "Ursus maritimus"}
+      ]
+    }
+
+    // renderCards = () => {
+    //   const { flashcards, } = this.state;
+    //   return flashcards.map( flashcard => 
+    //     <li key={flashcard.id}>{flashcard.word}</li>
+    //   )
+    // };
+    
+    getId = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+     }
+
+    addCard = (word) => {
+      const {flashcards} = this.state;
+      const flashcard = { word: "", id: this.getId(), };
+      this.setState({flashcards: [flashcard, ...flashcards]})
+    }
+
+    //   addItem = (name) => {
+    //     const { todos } = this.state;
+    //     const todo = { name, id: this.getUniqId() , complete: false }
+    //     this.setState({ todos: [todo, ...todos] }); 
+    //     }
+
+    // }
+
+  render() {
+    const {flashcards} = this.state
+    return(
+      <div>
+        <Flashcard info ={flashcards} />
+        <FlashcardForm addCard = {this.addCard}/>
+       </div>
+    )
+  }
 }
+
+    
+ 
 
 export default App;

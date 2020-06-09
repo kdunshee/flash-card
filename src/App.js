@@ -25,9 +25,9 @@ class App extends React.Component {
         .substring(1);
      }
 
-    addCard = (word) => {
+    addCard = (card) => {
       const {flashcards} = this.state;
-      const flashcard = { word: "", id: this.getId(), };
+      const flashcard = { word: card, id: this.getId(), };
       this.setState({flashcards: [flashcard, ...flashcards]})
     }
 
